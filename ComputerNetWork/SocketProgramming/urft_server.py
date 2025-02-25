@@ -31,8 +31,9 @@ class Server:
                 """
                 
                 # Receive the file name
-                header = file_name[:HEADER_SIZE]
-                file_name_payload = file_name[HEADER_SIZE:]
+                data, _ = self.server_socket.recvfrom(TOTAL_PACKET_SIZE)
+                header = data[:HEADER_SIZE]
+                file_name_payload = data[HEADER_SIZE:]
                 file_name = file_name_payload.decode("utf-8")
 
 
@@ -51,11 +52,20 @@ class Server:
                         received_checksum = header[SEQUENCE_NUM_SIZE:]
                         
                         
-                        if len(data) == SEQUENCE_NUM_SIZE and data == (b'\xff' * SEQUENCE_NUM_SIZE):                            
-                            print("EOF received.")
-                            break
+                        # if len(data) == SEQUENCE_NUM_SIZE and data == (b'\xff' * SEQUENCE_NUM_SIZE):                            
+                        #     print("EOF received.")
+                        #     break
                         
                         payload = data[HEADER_SIZE:]
+                        
+                        # Calculate checksum of the received payload
+                        calculated_checksum = hashlib.sha256(payload).digest()
+                        
+                        if received_checksum != calculated_checksum:
+                            print(f"Checksum error in segment {segment_number}.")
+                            continue
+                        
+                        print(payload)
                         file.write(payload)
 
                         segment_number += 1
@@ -77,7 +87,7 @@ class Server:
                 
                 
             except socket.timeout:
-                print("Timeout...")
+                # print("Timeout...")
                 pass
             
             except KeyboardInterrupt:
@@ -103,3 +113,6 @@ def main():
         print(f"""Usage: {sys.argv[0]} <server_ip> <server_port>""")
         sys.exit(1)
     
+
+if __name__ == '__main__':
+    main()
