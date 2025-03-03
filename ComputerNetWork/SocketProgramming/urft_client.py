@@ -40,6 +40,7 @@ class Client:
                     if ack_sequence_number == sequence_number:
                         print(f"Received ACK for segment {sequence_number}")
                         sequence_number += 1
+                        print(f"Sending segment {sequence_number}")
                         break
                     else:
                         print(f"Incorrect ACK {ack_sequence_number} for segment {sequence_number}, resending...")
