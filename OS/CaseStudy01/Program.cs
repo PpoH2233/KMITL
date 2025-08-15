@@ -1,0 +1,130 @@
+﻿// Case Study 01 - Multithreading 
+// Updated: 2025-06-25
+using System;
+using System.IO;
+using CalculatingFunctions;
+using System.Threading;
+using System;
+using System.Text.Json;
+using System.Diagnostics;
+
+class Program
+{
+    static decimal[] data = new decimal[11000001];
+    static decimal result = 0;
+
+    static int ThreadLimit = 9; // Number of threads based on processor count
+    
+    static int loopCount = 10000000; // Number of iterations for each thread
+    
+    static readonly object _lockObject = new object();
+
+    //Algorithm of CalClass.Calculate1()
+    //{        
+
+    //    index = 0;
+    //    while (index < 110000000) 
+    //    {
+    //        decimal sum = 0;
+
+
+    //        if ((int)data[index] % 2 == 0)
+    //        {
+    //            sum += (decimal)((double)data[index] * 0.002);
+    //        }
+    //        else if ((int)data[index] % 3 == 0)
+    //        {
+    //            sum += (decimal)((double)data[index] * 0.003);
+    //        }
+    //        else if ((int)data[index] % 5 == 0)
+    //        {
+    //            sum += (decimal)((double)data[index] * 0.005);
+    //        }
+    //        else if ((int)data[index] % 7 == 0)
+    //        {
+    //            sum += (decimal)((double)data[index] * 0.007);
+    //        }
+    //        else
+    //        {
+    //            sum += (decimal)((double)data[index] * 0.001);
+    //        }
+
+
+    //        if ((long)sum % 2 == 0)
+    //        {
+    //            result += sum * (decimal)0.00001;
+    //        }
+    //        else
+    //        {
+    //            result += (sum * (-1)) * (decimal)0.00001;
+    //        }
+
+    //        data[index] *= (decimal)0.1;
+    //        index++;
+
+    //    }
+    //}
+
+    private static void ThreadWork(int startIndex, int endIndex)
+    {
+        CalClass CF = new CalClass();
+        decimal threadTotal = 0;
+
+        for (int i = 0; i < 30; i++) 
+        {
+            for (int j = startIndex; j < endIndex; j++)
+            {
+                int localIndex = j;
+                decimal value = CF.Calculate1(ref data, ref localIndex);
+                threadTotal += value;
+            }
+        }
+
+        lock (_lockObject)
+        {
+            result += threadTotal;
+        }
+    }
+
+    private static void LoadData()
+    {
+        Console.WriteLine("Loading data...");
+        FileStream fs = new FileStream("data.bin", FileMode.Open);
+        BinaryReader br = new BinaryReader(fs);
+        for (int i = 0; i < data.Length; i++)
+        {
+            Single f = br.ReadSingle();
+            data[i] = (decimal)(f * 36);
+        }
+        Console.WriteLine("Data loaded successfully.\n\n");
+    }
+
+    private static void Main(string[] args)
+    {
+        LoadData();
+        Console.WriteLine("Calculation start ...");
+       
+        var sw = Stopwatch.StartNew();
+        Thread[] threads = new Thread[ThreadLimit];
+        
+        int chunkSize = loopCount / ThreadLimit;
+        
+        for (int i = 0; i < ThreadLimit; i++)
+        {
+            int threadId = i; // Capture loop variable
+            int start = threadId * chunkSize;
+            int end = (threadId == ThreadLimit - 1) ? loopCount : start + chunkSize;
+            
+            threads[i] = new Thread(() => ThreadWork(start, end));
+            threads[i].Start();
+        }
+
+        foreach (var thread in threads)
+        {
+            thread.Join();
+        }
+
+        sw.Stop();
+        Console.WriteLine($"Calculation finished in {sw.ElapsedMilliseconds} ms. Result: {result:F25}");
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ro4HgnIWAxo=",
+  "success": true,
+  "projectFilePath": "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/CaseStudy01.csproj",
+  "expectedPackageFiles": [
+    "/home/pooh23/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.8/microsoft.aspnetcore.app.ref.9.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

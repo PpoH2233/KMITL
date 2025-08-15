@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "CaseStudy01/1.0.0": {
+        "dependencies": {
+          "CalculatingFunctions": "1.0.0.0"
+        },
+        "runtime": {
+          "CaseStudy01.dll": {}
+        }
+      },
+      "CalculatingFunctions/1.0.0.0": {
+        "runtime": {
+          "CalculatingFunctions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CaseStudy01/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CalculatingFunctions/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
