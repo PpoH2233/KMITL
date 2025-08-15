@@ -75,8 +75,7 @@ class Program
             for (int j = startIndex; j < endIndex; j++)
             {
                 int localIndex = j;
-                decimal value = CF.Calculate1(ref data, ref localIndex);
-                threadTotal += value;
+                threadTotal += CF.Calculate1(ref data, ref localIndex);
             }
         }
 
