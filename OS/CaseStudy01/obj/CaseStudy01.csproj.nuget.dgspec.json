@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/CaseStudy01.csproj": {}
+    "/home/pooh23/Desktop/KMITL/Github/KMITL/OS/CaseStudy01/CaseStudy01.csproj": {}
   },
   "projects": {
-    "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/CaseStudy01.csproj": {
+    "/home/pooh23/Desktop/KMITL/Github/KMITL/OS/CaseStudy01/CaseStudy01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/CaseStudy01.csproj",
+        "projectUniqueName": "/home/pooh23/Desktop/KMITL/Github/KMITL/OS/CaseStudy01/CaseStudy01.csproj",
         "projectName": "CaseStudy01",
-        "projectPath": "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/CaseStudy01.csproj",
+        "projectPath": "/home/pooh23/Desktop/KMITL/Github/KMITL/OS/CaseStudy01/CaseStudy01.csproj",
         "packagesPath": "/home/pooh23/.nuget/packages/",
-        "outputPath": "/home/pooh23/Desktop/KMITL/3D/SoftDev/KMITL/OS/CaseStudy01/obj/",
+        "outputPath": "/home/pooh23/Desktop/KMITL/Github/KMITL/OS/CaseStudy01/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/pooh23/.nuget/NuGet/NuGet.Config"
